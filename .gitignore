@@ -187,3 +187,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+ImageStreamer/ImageStreamer/Properties/PublishProfiles/Debug.pubxml
+ImageStreamer/ImageStreamer/Properties/PublishProfiles/release.pubxml
