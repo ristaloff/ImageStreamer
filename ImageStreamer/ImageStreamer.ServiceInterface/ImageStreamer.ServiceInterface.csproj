@@ -74,10 +74,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="testImage.jpeg">
+    <Content Include="testImage_medium.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="testImage_large.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="testImage_small.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

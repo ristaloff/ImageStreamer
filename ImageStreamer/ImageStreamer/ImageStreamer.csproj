@@ -110,11 +110,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="largeImageStreamController.js" />
-    <Content Include="imageStreamController.js" />
+    <Content Include="imageController.js" />
     <Content Include="index.html" />
+    <Content Include="testSmallImage.html" />
     <Content Include="testLargeImage.html" />
-    <Content Include="testImage.html" />
+    <Content Include="testMediumImage.html" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\release.pubxml" />
