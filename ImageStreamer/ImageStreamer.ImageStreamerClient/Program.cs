@@ -20,14 +20,13 @@ namespace ImageStreamer.ImageStreamerClient
         {
             Console.WriteLine("Starting ImageStreamerClient ...");
             //LogManager.LogFactory = new DebugLogFactory(); //Todo get JsonServiceClient to provide logging
-            var baseUri = "http://localhost:49415/";
+            var baseUri = "http://localhost:8080/";
             //var baseUri = "http://192.168.1.19:8000/";
             //var baseUri = "http://192.168.226.129:8000/";
             JsonServiceClient client;
             try
             {
-                client = new JsonServiceClient(baseUri);
-                
+                client = new JsonServiceClient(baseUri);                
             }
             catch (Exception ex)
             {
