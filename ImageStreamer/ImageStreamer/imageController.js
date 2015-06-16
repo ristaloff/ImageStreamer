@@ -1,14 +1,15 @@
 ﻿var image;
 var i = 1;
 var errorCount = 1;
+var size = "medium";
 function reload_img() {
-    image.src = "/hellolargeimage/" + i++;
-
+    image.src = "/helloimage/" + i++ + "/" + size;
 }
 function error_img() {
-    setTimeout("image.src = '/hellolargeimage/error'" + errorCount++, 100);
+    setTimeout("image.src = '/helloimage/error'" + errorCount++ + "/" + size, 100);
 }
-function init_img() {
+function init_img(size) {
+    this.size = size;
     image = document.getElementById("jpeg_img");
     image.onload = reload_img;
     image.onerror = error_img;

@@ -14,16 +14,17 @@ namespace ImageStreamer.ServiceInterface
 {
     public class MyServices : Service
     {
-        private static byte[] _imageBytes;
+        private static byte[] _mediumImageBytes;
         private static byte[] _largeImageBytes;
+        private static byte[] _smallImageBytes;
 
         public MyServices()
         {
             var directoryName = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath) ?? "";
-            if (_imageBytes == null)
+            if (_mediumImageBytes == null)
             {
-                var imagePath = Path.Combine(directoryName, "testImage.jpeg");
-                _imageBytes = File.ReadAllBytes(imagePath);
+                var imagePath = Path.Combine(directoryName, "testImage_medium.jpeg");
+                _mediumImageBytes = File.ReadAllBytes(imagePath);
                 Console.WriteLine("Image loaded!");
             }
 
@@ -32,6 +33,13 @@ namespace ImageStreamer.ServiceInterface
                 var imagePath = Path.Combine(directoryName, "testImage_large.jpeg");
                 _largeImageBytes = File.ReadAllBytes(imagePath);
                 Console.WriteLine("Large image loaded!");
+            }
+            
+            if (_smallImageBytes == null)
+            {
+                var imagePath = Path.Combine(directoryName, "testImage_small.jpeg");
+                _smallImageBytes = File.ReadAllBytes(imagePath);
+                Console.WriteLine("Small image loaded!");
             }
         }
         
@@ -43,19 +51,26 @@ namespace ImageStreamer.ServiceInterface
         [AddHeader(ContentType = "image/jpeg")]
         public Stream Get(HelloImage request)
         {
-            Console.WriteLine("Get(HelloImage) " + request.ImageName);
-            
-            var ms = new MemoryStream(_imageBytes);
+            Console.WriteLine("Get(HelloImage). Name={0}. Size={1}.", request.Name, request.Size);
+
+            Stream ms;
+            if (request.Size == "small")
+                ms = new MemoryStream(_smallImageBytes);
+            else if (request.Size == "large")
+                ms = new MemoryStream(_largeImageBytes);
+            else
+                ms = new MemoryStream(_mediumImageBytes);
+
             return ms;
         }
         
-        [AddHeader(ContentType = "image/jpeg")]
-        public Stream Get(HelloLargeImage request)
-        {
-            Console.WriteLine("Get(HelloLargeImage) " + request.ImageName);
-
-            var ms = new MemoryStream(_largeImageBytes);
-            return ms;
-        }
+//        [AddHeader(ContentType = "image/jpeg")]
+//        public Stream Get(HelloLargeImage request)
+//        {
+//            Console.WriteLine("Get(HelloLargeImage) " + request.ImageName);
+//
+//            var ms = new MemoryStream(_largeImageBytes);
+//            return ms;
+//        }
     }
 }

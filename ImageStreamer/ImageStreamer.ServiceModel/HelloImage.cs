@@ -2,9 +2,11 @@
 
 namespace ImageStreamer.ServiceModel
 {
-    [Route("/helloimage/{ImageName}")]
+    [Route("/helloimage/{Name}")]
+    [Route("/helloimage/{Name}/{Size}")]
     public class HelloImage
     {
-        public string ImageName { get; set; }
+        public string Name { get; set; }
+        public string Size { get; set; }
     }
 }

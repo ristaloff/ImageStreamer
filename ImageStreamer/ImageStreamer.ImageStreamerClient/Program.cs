@@ -20,9 +20,8 @@ namespace ImageStreamer.ImageStreamerClient
         {
             Console.WriteLine("Starting ImageStreamerClient ...");
             //LogManager.LogFactory = new DebugLogFactory(); //Todo get JsonServiceClient to provide logging
-            var baseUri = "http://localhost:8080/";
             //var baseUri = "http://192.168.1.19:8000/";
-            //var baseUri = "http://192.168.226.129:8000/";
+            var baseUri = "http://192.168.226.129:8000/";
             JsonServiceClient client;
             try
             {
@@ -41,7 +40,9 @@ namespace ImageStreamer.ImageStreamerClient
                 stopWatch.Restart();
                 try
                 {
-                    var response = client.Get(new HelloImage() {ImageName = i.ToString("d5")});
+                    var response = client.Get(new HelloImage() {Name = i.ToString("d5"), Size = "small"});
+//                    var response = client.Get(new HelloImage() {Name = i.ToString("d5"), Size = "medium"});
+//                    var response = client.Get(new HelloImage() {Name = i.ToString("d5"), Size = "large"});
 
                     if (response == null)
                         Console.WriteLine("Response is null!");
@@ -51,7 +52,7 @@ namespace ImageStreamer.ImageStreamerClient
                         {
                             if (stream != null)
                             {
-                                stream.ReadTimeout = stream.WriteTimeout = 100;  //Set timeout on the System.NetConnectStream
+                                stream.ReadTimeout = stream.WriteTimeout = 1000;  //Set timeout on the System.NetConnectStream
                                 using (var sr = new StreamReader(stream))
                                 {
                                     var imageBytes = stream.ReadFully();
@@ -71,6 +72,7 @@ namespace ImageStreamer.ImageStreamerClient
                     Console.WriteLine("\nRetry in {0} ms.", sleepTime);
                     Thread.Sleep(sleepTime);
                 }
+                //Thread.Sleep(20);
             }
         }
 
